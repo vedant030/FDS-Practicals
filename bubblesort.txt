@@ -1,0 +1,23 @@
+n=int(input("Enter number of students:"))
+percentage=[]
+for i in range(n):
+    user=float(input("Enter Marks Of Students:"))
+    percentage.append(user)
+        
+
+    
+def bubbleSort(list1,n):
+    for i in range(n-1):
+        for j in range(n-1-i):
+            if list1[j]>list1[j+1]:
+                temp=list[j+1]
+                list1[j+1]=list1[j]
+                list1[j]=temp
+        print("\nBubble Sort")
+        return(list1)
+        
+sorted2=bubbleSort(percentage,n)
+print(sorted2)
+print("\nTop 5 Percentage are :")
+for i in range(n-1,n-6,-1):
+    print(sorted2[i])

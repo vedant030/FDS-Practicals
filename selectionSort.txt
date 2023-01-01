@@ -1,0 +1,22 @@
+n=int(input("Enter number of students:"))
+percentage=[]
+for i in range(n):
+    user=float(input("Enter Marks Of Students:"))
+    percentage.append(user)
+        
+def selectionSort(list1,n):
+    for i in range(n):
+        for j in range(i,n):
+            if list1[j]<list1[i]:
+                temp=list1[i]
+                list1[i]=list1[j]
+                list1[j]=temp
+    print("\nSelection Sort")
+    return(list1)
+    
+sorted1=selectionSort(percentage,n)
+print(sorted1)
+            
+print("\nTop 5 Percentage are :")
+for i in range(n-1,n-6,-1):
+    print(sorted1[i])
