@@ -1,0 +1,186 @@
+#include<iostream>
+using namespace std;
+class node
+{
+    public:
+    int start, end, min, max;
+    int flag;
+    node* next;
+};
+void create_node(node* &head, node* &tail)
+{
+    node* new_node=new node();
+    cout<<"Enter the start time : ";
+    cin>>new_node->start;
+    cout<<"Enter the end time : ";
+    cin>>new_node->end;
+    cout<<"Enter the minimum duration of visit : ";
+    cin>>new_node->min;
+    cout<<"Enter the maximum duration of visit : ";
+    cin>>new_node->max;
+    new_node->flag=0;
+    new_node->next=NULL;
+    if (head==NULL && tail==NULL)
+    {
+        head=new_node;
+        tail=new_node;
+    }
+    else
+    {
+        tail->next=new_node;
+        tail=tail->next;
+    }
+}
+void display(node* &head)
+{
+    node* trav=head;
+    int srno=1;
+    string status;
+    if(trav->flag==0)
+    {
+        status="Empty";
+
+    }
+    else if(trav->flag==1)
+    {
+        status="Booked";
+    }
+    cout<<"Sr.no\tStart\tEnd\tMin\tMax\tStatus\n";;
+    while(trav!=NULL)
+    {
+        cout<<srno<<"\t"<<trav->start<<"\t"<<trav->end<<"\t"<<trav->min<<"\t"<<trav->max<<"\t"<<status<<endl;
+        trav=trav->next;
+        srno++;
+    }
+}
+void book_app(node* &head, node* &tail)
+{
+    int start;
+    cout<<"Enter the start time to book the appointment : ";
+    cin>>start;
+    node* trav=head;
+    while(trav->next!=NULL)
+    {
+        if (trav->start==start)
+        {
+            if(trav->flag==0)
+            {
+                trav->flag=1;
+                cout<<"Your appointment is booked. "<<endl;
+            }
+            else
+            {
+                cout<<"The appointment is already booked."<<endl;
+            }
+        }
+        trav=trav->next;
+    }
+}
+void delete_app(node* &head, node* &tail)
+{
+    int start;
+    cout<<"Enter the start time to cancell the appointment : ";
+    cin>>start;
+    node* trav=head;
+    while(trav->next!=NULL)
+    {
+        if(trav->start==start)
+        {
+            if(trav->flag==1)
+            {
+                trav->flag=0;
+                cout<<"Your appointment is cancelled."<<endl;
+            }
+            else
+            {
+                cout<<"The appointment is already free."<<endl;
+            }
+        }
+        trav=trav->next;
+    }
+}
+void sort(node* &head, node* &tail, int n)
+{
+    int temp;
+    for (int i=0; i<n; i++)
+    {
+        node* trav=head;
+        while(trav->next!=NULL)
+        {
+            if(trav->start>trav->next->start)
+            {
+                temp=trav->start;
+                trav->start=trav->next->start;
+                trav->next->start=temp;
+
+                temp=trav->end;
+                trav->end=trav->next->end;
+                trav->next->end=temp;
+
+                temp=trav->min;
+                trav->min=trav->next->min;
+                trav->next->min=temp;
+
+                temp=trav->max;
+                trav->max=trav->next->max;
+                trav->next->max=temp;
+            }
+            trav=trav->next;
+        }
+    }
+}
+
+int main()
+{
+    int app, choice;
+    int start=0;
+    node* head=NULL, * tail=NULL;
+    cout<<"Enter the number of appoinment : ";
+    cin>>app;
+    cout<<endl<<endl;
+    for(int i=0; i<app; i++)
+    {
+        cout<<"Enter the details for "<<i+1<<" appointment."<<endl;
+        create_node(head, tail);
+        cout<<endl;
+    }
+    while(start==0)
+    {
+        cout<<"**MENUE**"<<endl;
+        cout<<"Press 1: To display the appointment status."<<endl
+        <<"Press 2: To book the appointment."<<endl
+        <<"Press 3: To cancle the appointment."<<endl
+        <<"Press 4: To sort the appointment."<<endl
+        <<"Press 5: To exit."<<endl;
+        cout<<"Enter your choice : ";
+        cin>>choice;
+        switch(choice)
+        {
+            case 1:
+            display(head);
+            break;
+
+            case 2:
+            book_app(head, tail);
+            display(head);
+            break;
+
+            case 3:
+            delete_app(head, tail);
+            display(head);
+            break;
+
+            case 4:
+            sort(head, tail, app);
+            display(head);
+
+            case 5:
+            start++;
+
+            default:
+            cout<<"You have entered a wrong choice."<<endl;
+        }
+    }
+ 
+    return 0;
+}
