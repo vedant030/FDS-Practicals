@@ -1,0 +1,80 @@
+def frequency():
+    str1 = input("Enter the string: ")
+    char = input("Enter the character: ")
+    counter = 0
+    for i in range(len(str1)):
+        if char == str1[i]:
+            counter += 1
+    print("The character %s is present %d times in string %s" % (char, counter, str1))
+
+
+
+def longest_length():
+    str = input("Enter the string: ")
+    list = str.split()
+    m = 0
+    print(list)
+    for i in range(len(list)):
+        len(list[i])
+        if m < len(list[i]):
+            m = len(list[i])
+            word_index = i
+    print("The word with longest length is: ", list[word_index])
+
+
+
+def palindrome():
+    str = input("Enter the string: ")
+    length = len(str)
+    j = length - 1  # reverse order
+    flag = 0
+    for i in range(int(length / 2 + 1)):  # the middle letter should have same elements on both side
+        if str[i] != str[j]:
+            flag = 1
+            break
+        else:
+            j = j-1
+    if flag == 0:
+        print("\n Given word is a palindrome")
+    else:
+        print("\n Given word is not a palindrome")
+
+
+def occurrence():
+    str1 = input("Enter the input: ")
+    list1 = str1.split()  # list1 contains all the words
+    list2 = set(list1)
+    list3 = list(list2)   # list3 contains only distinct words
+    print(list1)
+    print(list3)
+    list4 = []
+    list5 = []
+    counter = 0
+    for i in range(len(list3)):
+        counter = 0
+        for j in range(len(list1)):
+            if list3[i] == list1[j]:
+                counter += 1
+        list4 = list3[i], counter
+        list5.append(list4)   # contanis final answer with word and its count
+    print("\n", list5)
+
+
+def main():
+    while True:
+        print("\n1.Frequency of occurrence of character\n2.Longest length\n3.Palindrome\n4.Occurrence of each word\n5.Exit")
+        ch = int(input("enter choice: "))
+        if ch == 5:
+            print("End of program")
+            exit()
+        if ch == 1:
+            print(frequency())
+        if ch == 2:
+            print(longest_length())
+        if ch == 3:
+            print(palindrome())
+        if ch == 4:
+            print(occurrence())
+
+
+main()
