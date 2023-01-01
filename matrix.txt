@@ -1,0 +1,66 @@
+def get(matrix,r,c):
+    for i in range(r):
+        a=[]
+        print("\nEnter the element of row ", i+1)
+        for j in range(c):
+            user = int(input())
+            a.append(user)
+        matrix.append(a)
+        
+def display(matrix,r,c):
+    for i in range(r):
+        print(matrix[i])
+        
+def transpose(matrix,r,c):
+    result=[]
+    for i in range(c):
+        a=[]
+        for j in range(r):
+            a.append(matrix[j][i])
+        result.append(a)
+    print("\nTRANSPOSE OF MATRIX ")
+    display(result,c,r)
+        
+def add(m1,m2,r,c):
+    result=[]
+    for i in range(r):
+        a=[]
+        for j in range(c):
+            a.append(m1[i][j] + m2[i][j])
+        result.append(a)
+    print("\nADDITION OF MATRICES")
+    display(result,r,c)
+        
+def multiply(m1,m2,r1,c1,r2,c2):
+    result=[]
+    for i in range(r1):
+        a=[]
+        for j in range(c2):
+            a.append(0)
+        result.append(a)
+    for i in range(r1):
+        for j in range(c2):
+            for k in range(r1):
+                result[i][j] += m1[i][k]*m2[k][j]
+    print("\nMULTIPLICATION OF MATRICES")
+    display(result, r1,c2)
+    
+m1=[]
+
+r1=int(input("Enter the rows : "))
+c1=int(input("Enter the columns : "))
+get(m1,r1,c1)
+display(m1,r1,c1)
+transpose(m1,r1,c1)
+
+
+m2=[]
+
+
+r2=int(input("Enter the rows : "))
+c2=int(input("Enter the columns : "))
+get(m2,r2,c2)
+display(m2,r2,c2)
+transpose(m2,r2,c2)
+add(m1,m2,r1,c1)
+multiply(m1,m2,r1,r2,c1,c2)
