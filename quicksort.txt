@@ -1,0 +1,40 @@
+n=int(input("Enter number of students:"))
+percentage=[]
+for i in range(n):
+    user=float(input("Enter Marks Of Students:"))
+    percentage.append(user)
+
+        
+def quickSort(arr, low, high):
+    if(low < high):
+        m = partition(arr, low, high)
+        quickSort(arr,low, m-1)
+        quickSort(arr,m+1, high)
+def partition(arr,low,high):
+    pivot = arr[low]
+    i = low + 1
+    j = high
+    
+    while(True):
+        if(i<=j and arr[i] < pivot):
+            i+=1
+        if(j>=i and arr[j] > pivot):
+            j-=1
+        if(j>=i):
+            temp = arr[j]
+            arr[j] = arr[i]
+            arr[i] = temp
+        else:
+            break
+    temp = arr[low]
+    arr[low] = arr[j]
+    arr[j] = temp
+    return j
+quickSort(percentage,0,n-1)
+print("quick sort:",percentage)
+    
+
+            
+print("\nTop 5 Percentage are :")
+for i in range(n-1,n-6,-1):
+    print(percentage[i])
